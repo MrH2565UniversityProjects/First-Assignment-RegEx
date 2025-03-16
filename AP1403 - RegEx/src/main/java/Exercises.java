@@ -9,10 +9,9 @@ public class Exercises {
         complete the method below, so it will validate an email address
      */
     public boolean validateEmail(String email) {
-        String regex = ""; // todo
+        String regex = "^[A-Za-z0-9+_\\.?-]+@[A-Za-z0-9\\.?\\-]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-
         return matcher.matches();
     }
 
@@ -22,9 +21,12 @@ public class Exercises {
         if there's no match for a date, return null
      */
     public String findDate(String string) {
-        // todo
-        return null;
+        String reg = "\\b(\\d{2})/(\\d{2})/(\\d{4})\\b";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(string);
+        return matcher.find() ? matcher.group() : null;
     }
+    
 
     /*
         given a string, implement the method to detect all valid passwords
@@ -37,8 +39,14 @@ public class Exercises {
         - has no white-space in it
      */
     public int findValidPasswords(String string) {
-        // todo
-        return -1;
+        String reg = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\\@\\$\\!\\%\\*\\?\\&])[A-Za-z[0-9]\\@\\$\\!\\%\\*\\?\\&]{8,}";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(string);
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        return count == 0 ? -1 : count;
     }
 
     /*
@@ -49,8 +57,21 @@ public class Exercises {
      */
     public List<String> findPalindromes(String string) {
         List<String> list = new ArrayList<>();
-        // todo
+        String reg = "\\b[a-zA-Z]{3,}\\b";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(string);
+        while (matcher.find()) {
+            String word = matcher.group();
+            if (isPalindrome(word)) {
+                list.add(word);
+            }
+        }
         return list;
+    }
+    // Private method to check if a word is a palindrome
+    private boolean isPalindrome(String word) {
+        String lower_word = word.toLowerCase();
+        return lower_word.equals(new StringBuilder(lower_word).reverse().toString());
     }
 
     public static void main(String[] args) {

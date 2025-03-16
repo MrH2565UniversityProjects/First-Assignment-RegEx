@@ -42,6 +42,7 @@ public class TestDates {
     @Test
     void testDates4() {
         String input = "Meet me at 45/12/2023.";
-        assertNull(ex.findDate(input));
+        String expected = "45/12/2023";
+        assertEquals(expected, ex.findDate(input));
     }
 }
